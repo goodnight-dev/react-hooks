@@ -23,31 +23,51 @@ Requires React `>=19`.
 
 ```ts
 // 1. Barrel — everything from one entry point.
-import { useTheme } from '@goodnight-dev/react-hooks';
+import { useLocalStorage, useTheme } from '@goodnight-dev/react-hooks';
 
 // 2. Subpath — smallest possible import, no barrel involved at all.
 import { useTheme } from '@goodnight-dev/react-hooks/useTheme';
+import { useLocalStorage } from '@goodnight-dev/react-hooks/useLocalStorage';
 ```
 
 Both are fully typed, ESM-only, and tree-shakable.
 
 ## API
 
-| Hook         | Description                                                   |
-| ------------ | ------------------------------------------------------------- |
-| `useTheme()` | Reads the OS `prefers-color-scheme`, live-updating on change. |
+| Hook                            | Description                                                                        |
+| ------------------------------- | ---------------------------------------------------------------------------------- |
+| `useTheme()`                    | Reads the OS `prefers-color-scheme`, live-updating on change.                      |
+| `useLocalStorage(key, initial)` | Reads and writes a JSON-serializable value in `localStorage`, syncing across tabs. |
 
 ```tsx
-import { useTheme } from '@goodnight-dev/react-hooks';
+import { useLocalStorage, useTheme } from '@goodnight-dev/react-hooks';
+
+// Module scope: created once when this file loads, never re-allocated on
+// render, so there's nothing to memoize.
+const defaultSettings = { seen: false };
 
 function App() {
   const { theme, isDarkMode } = useTheme();
+  const [settings, setSettings] = useLocalStorage(
+    `users-${userId}`,
+    defaultSettings,
+  );
+
   if (theme === undefined) return null; // avoid a flash of the wrong theme
-  return <div data-theme={theme}>{isDarkMode ? '🌙' : '☀️'}</div>;
+  return (
+    <div data-theme={theme}>
+      {isDarkMode ? '🌙' : '☀️'}
+      <button onClick={() => setSettings((s) => ({ ...s, seen: true }))}>
+        Dismiss
+      </button>
+    </div>
+  );
 }
 ```
 
-See [`src/use-theme.md`](./src/use-theme.md) for the design rationale.
+See [`src/use-theme.md`](./src/use-theme.md) and
+[`src/use-local-storage.md`](./src/use-local-storage.md) for the design
+rationale behind each.
 
 ## Project goals
 

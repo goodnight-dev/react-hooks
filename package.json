@@ -27,6 +27,10 @@
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs"
     },
+    "./useLocalStorage": {
+      "types": "./dist/use-local-storage.d.mts",
+      "import": "./dist/use-local-storage.mjs"
+    },
     "./useTheme": {
       "types": "./dist/use-theme.d.mts",
       "import": "./dist/use-theme.mjs"
