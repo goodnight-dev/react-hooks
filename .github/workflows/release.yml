@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+# changesets/action opens the "Version Packages" PR and, on merge, publishes.
+# `id-token: write` is required for npm OIDC trusted publishing + provenance.
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+env:
+  LEFTHOOK: '0'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      # npm OIDC trusted publishing requires npm >= 11.5.1; the bundled npm can
+      # be older, so install a current one before publishing.
+      - name: Update npm
+        run: npm install --global npm@latest
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # When a changeset is present, opens/updates a "Version Packages" PR.
+      # When that PR merges (no changesets left, version bumped), it publishes.
+      - name: Create Version PR or publish
+        uses: changesets/action@v1
+        with:
+          version: pnpm run version-packages
+          publish: pnpm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # No NODE_AUTH_TOKEN on purpose: setting it (real OR empty) makes npm
+          # try that token and skip OIDC. Left unset, npm (>= 11.5.1, installed
+          # above) authenticates via OIDC trusted publishing.
