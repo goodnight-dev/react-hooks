@@ -1,6 +1,6 @@
 {
   "name": "@goodnight-dev/react-hooks",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Small, strict, tree-shakeable React hooks — the ones you end up writing in every project, packaged the right way.",
   "keywords": [
     "react",
