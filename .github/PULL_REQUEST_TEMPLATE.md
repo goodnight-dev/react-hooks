@@ -2,7 +2,8 @@ Closes #
 
 ## What & why
 
-<!-- What does this PR change, and why? -->
+<!-- What does this PR change, and why? Link related issues, e.g.
+  "Closes #123". -->
 
 ## Checklist
 
@@ -13,4 +14,4 @@ Closes #
 - [ ] TSDoc / docs updated if the public API or behavior changed
 - [ ] Commits follow
       [Conventional Commits](https://www.conventionalcommits.org/), with a
-      `Refs: #<number>` trailer on each if this closes an issue
+      `Refs: #<number>` trailer on each if this relates to an open issue
