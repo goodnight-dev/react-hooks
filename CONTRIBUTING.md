@@ -133,6 +133,64 @@ For the full walkthrough, see the [recipes](./docs/recipes/):
 - [Adding a hook](./docs/recipes/adding-a-hook.md)
 - [Cutting a release](./docs/recipes/cutting-a-release.md)
 
+## Branching & pull requests
+
+Every change lands on `main` through a pull request. There is no direct push to
+`main` outside of the one-time repo bootstrap.
+
+### Branching
+
+Branch off `main`, named:
+
+```
+<type>/<short-slug>
+```
+
+or, when the work is tracked by an open GitHub issue:
+
+```
+<type>/<issue-number>-<short-slug>
+```
+
+`<type>` matches the Conventional Commits type of the change (`feat`, `fix`,
+`chore`, `docs`, `refactor`, …). One unit of work per branch, one branch per PR
+— keep it small enough to review in a sitting.
+
+Examples: `feat/42-use-media-query`, `fix/use-theme-listener-leak`,
+`docs/branching-and-pr-conventions`.
+
+### Referencing an issue
+
+If the work closes or relates to an open issue:
+
+- Every commit on the branch gets a `Refs: #<number>` trailer, so the connection
+  is traceable from `git log` alone, independent of GitHub.
+- The **PR body** — not the commit body — includes `Closes #<number>` (or
+  `Fixes #<number>` for a bug fix), so GitHub closes the issue automatically on
+  merge.
+
+Keeping the closing keyword out of commit trailers is deliberate: a commit that
+merely references an issue shouldn't auto-close it before the rest of the PR has
+landed. The PR body is the one place that actually triggers closure, and it only
+fires once, on merge to `main`.
+
+### Pull requests
+
+1. Push the branch and open a PR against `main`. Fill in the PR template
+   honestly — every checkbox is something CI or a reviewer would otherwise have
+   to catch by hand.
+2. `pnpm check` must pass locally before you open the PR; CI re-runs it across
+   the full Node matrix (see [`ci.yml`](.github/workflows/ci.yml)).
+3. **Merge with rebase** once CI is green and the PR is approved — the default
+   and preferred method here, matching
+   [`@goodnight-dev/utils`](https://github.com/goodnight-dev/utils). It replays
+   your commits onto `main` individually rather than collapsing them into a
+   merge or squash commit, keeping a linear, readable history where each commit
+   still stands on its own.
+
+`main` is protected by a repository ruleset: required status checks, linear
+history, and pull requests are enforced technically, not just by convention.
+
 ## Commit conventions
 
 Commit messages follow

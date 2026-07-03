@@ -1,6 +1,8 @@
+Closes #
+
 ## What & why
 
-<!-- What does this PR change, and why? Link related issues, e.g. "Closes #123". -->
+<!-- What does this PR change, and why? -->
 
 ## Checklist
 
@@ -10,4 +12,5 @@
 - [ ] A changeset was added (`pnpm changeset`) for any user-facing change
 - [ ] TSDoc / docs updated if the public API or behavior changed
 - [ ] Commits follow
-      [Conventional Commits](https://www.conventionalcommits.org/)
+      [Conventional Commits](https://www.conventionalcommits.org/), with a
+      `Refs: #<number>` trailer on each if this closes an issue
