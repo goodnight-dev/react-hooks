@@ -1,0 +1,19 @@
+# Git hooks, managed by lefthook (https://lefthook.dev).
+# Registered automatically by the `prepare` script on `pnpm install`.
+
+commit-msg:
+  jobs:
+    - name: commitlint
+      run: pnpm exec commitlint --edit {1}
+
+pre-commit:
+  parallel: true
+  jobs:
+    - name: format
+      glob: '*.{ts,js,mjs,cjs,json,md,yml,yaml}'
+      run: pnpm exec prettier --write {staged_files}
+      stage_fixed: true
+    - name: lint
+      glob: '*.{ts,js,mjs,cjs}'
+      run: pnpm exec eslint --fix {staged_files}
+      stage_fixed: true
