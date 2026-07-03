@@ -1,0 +1,100 @@
+{
+  "name": "@goodnight-dev/react-hooks",
+  "version": "0.0.0",
+  "description": "Small, strict, tree-shakeable React hooks — the ones you end up writing in every project, packaged the right way.",
+  "keywords": [
+    "react",
+    "react-hooks",
+    "hooks",
+    "typescript",
+    "esm",
+    "tree-shakable"
+  ],
+  "license": "MIT",
+  "author": "Ian Goodnight",
+  "homepage": "https://github.com/goodnight-dev/react-hooks#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goodnight-dev/react-hooks.git"
+  },
+  "bugs": {
+    "url": "https://github.com/goodnight-dev/react-hooks/issues"
+  },
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    },
+    "./useTheme": {
+      "types": "./dist/use-theme.d.mts",
+      "import": "./dist/use-theme.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": ">=19.0.0"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@11.9.0+sha512.bd682d5d03fe525ef7c9fd6780c6884d1e756ac4c9c9fe00c538782824310dcf90e3ddc4f53835f06dfaebd5085e41855e0bcbb3b60de2ac5bbab89e5036f03b",
+  "scripts": {
+    "prepare": "lefthook install",
+    "build": "tsdown",
+    "docs:build": "typedoc",
+    "docs:watch": "typedoc --watch",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "publint": "publint",
+    "attw": "attw --pack --profile esm-only .",
+    "check:exports": "pnpm run publint && pnpm run attw",
+    "check": "pnpm run format && pnpm run lint && pnpm run build && pnpm run typecheck && pnpm run test && pnpm run check:exports",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm run build && node scripts/release-publish.mjs"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.4",
+    "@changesets/cli": "^2.31.0",
+    "@commitlint/cli": "^21.2.0",
+    "@commitlint/config-conventional": "^21.2.0",
+    "@eslint/js": "^10.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^26.1.0",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitest/coverage-v8": "^4.1.9",
+    "esbuild": "^0.28.1",
+    "eslint": "^10.6.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-perfectionist": "^5.9.1",
+    "eslint-plugin-react-hooks": "^7.1.0",
+    "globals": "^17.7.0",
+    "jsdom": "^29.1.1",
+    "lefthook": "^2.1.9",
+    "prettier": "^3.9.4",
+    "publint": "^0.3.21",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tsdown": "^0.22.3",
+    "typedoc": "^0.28.19",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.62.1",
+    "unrun": "^0.3.1",
+    "vitest": "^4.1.9"
+  }
+}

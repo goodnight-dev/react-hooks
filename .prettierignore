@@ -1,0 +1,8 @@
+dist
+coverage
+docs/api
+pnpm-lock.yaml
+CHANGELOG.md
+
+# Local, tool-managed settings (also git-ignored) — not ours to format.
+.claude

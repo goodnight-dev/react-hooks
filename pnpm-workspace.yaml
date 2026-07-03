@@ -1,0 +1,8 @@
+# Not a multi-package workspace — this file exists only because pnpm 11 moved
+# the build-script allowlist here. esbuild and lefthook need to run install
+# scripts (esbuild fetches its platform binary; lefthook installs the git
+# hooks). pnpm blocks dependency build scripts by default, so allow them
+# explicitly.
+allowBuilds:
+  esbuild: true
+  lefthook: true

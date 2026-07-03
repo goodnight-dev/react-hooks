@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+.DS_Store
+*.log
+.eslintcache
+
+# TypeDoc output
+docs/api/
+
+# Local working directories (session notes, scratch output)
+.planning/
+.tmp/
