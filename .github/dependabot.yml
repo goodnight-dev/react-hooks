@@ -1,0 +1,43 @@
+# Dependabot version updates: scheduled PRs that bump dependencies when a newer
+# version is available. Separate from Dependabot security updates (advisory-
+# driven), which are enabled at the repo level.
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates
+#
+# The default branch is `main`, so Dependabot reads this file from `main` and
+# opens version-update PRs against it (no target-branch override needed).
+#
+# Noise control: minor + patch bumps are grouped into one PR per ecosystem;
+# majors stay individual so breaking changes get reviewed one at a time.
+# `commit-message.prefix: chore` + `include: scope` yields `chore(deps): ...`
+# titles that satisfy commitlint.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      npm-minor-patch:
+        applies-to: version-updates
+        patterns: ['*']
+        update-types: ['minor', 'patch']
+
+  # ── GitHub Actions workflow pins ────────────────────────────────────────────
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore
+      include: scope
+    groups:
+      github-actions-all:
+        applies-to: version-updates
+        patterns: ['*']

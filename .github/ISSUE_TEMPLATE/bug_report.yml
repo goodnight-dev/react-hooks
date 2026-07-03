@@ -1,0 +1,37 @@
+name: Bug report
+description: Report a bug in @goodnight-dev/react-hooks
+labels: ['bug', 'triage']
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to file a bug report!
+  - type: input
+    id: hook
+    attributes:
+      label: Affected hook and version
+      placeholder: 'useTheme, @goodnight-dev/react-hooks@0.0.0'
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description:
+        A clear description of the bug, including what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Minimal steps or a code snippet that reproduces the issue.
+      render: tsx
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: 'Node 22, React 19, pnpm 11, macOS 15'
+    validations:
+      required: false
