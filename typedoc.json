@@ -1,0 +1,13 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["src/index.ts"],
+  "out": "docs/api",
+  "name": "@goodnight-dev/react-hooks",
+  "includeVersion": false,
+  "hideGenerator": true,
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "navigationLinks": {
+    "GitHub": "https://github.com/goodnight-dev/react-hooks"
+  }
+}
