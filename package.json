@@ -35,6 +35,10 @@
       "types": "./dist/use-theme.d.mts",
       "import": "./dist/use-theme.mjs"
     },
+    "./useWindowSize": {
+      "types": "./dist/use-window-size.d.mts",
+      "import": "./dist/use-window-size.mjs"
+    },
     "./package.json": "./package.json"
   },
   "files": [
