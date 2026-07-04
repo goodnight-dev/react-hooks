@@ -38,6 +38,7 @@ Both are fully typed, ESM-only, and tree-shakable.
 | ------------------------------- | ---------------------------------------------------------------------------------- |
 | `useTheme()`                    | Reads the OS `prefers-color-scheme`, live-updating on change.                      |
 | `useLocalStorage(key, initial)` | Reads and writes a JSON-serializable value in `localStorage`, syncing across tabs. |
+| `useWindowSize()`               | Reads the viewport `width` / `height`, live-updating on resize.                    |
 
 ```tsx
 import { useLocalStorage, useTheme } from '@goodnight-dev/react-hooks';
@@ -65,9 +66,10 @@ function App() {
 }
 ```
 
-See [`src/use-theme.md`](./src/use-theme.md) and
-[`src/use-local-storage.md`](./src/use-local-storage.md) for the design
-rationale behind each.
+See [`src/use-theme.md`](./src/use-theme.md),
+[`src/use-local-storage.md`](./src/use-local-storage.md), and
+[`src/use-window-size.md`](./src/use-window-size.md) for the design rationale
+behind each.
 
 ## Project goals
 
