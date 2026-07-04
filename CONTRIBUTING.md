@@ -86,6 +86,31 @@ stable across renders where a consumer would reasonably depend on it — memoize
 with `useMemo` / `useCallback` rather than returning a new identity on every
 render.
 
+### 6. Immutable public shapes
+
+A hook's return value — and any props/options object a future hook accepts — is
+a shape the consumer reads, never mutates in place.
+
+- **Every property of an exported `interface` is `readonly`.** Enforced by
+  `eslint-plugin-functional`'s `functional/type-declaration-immutability` rule
+  (`eslint.config.js`) at `ReadonlyShallow`: a property missing `readonly` fails
+  `pnpm lint`. The rule can only flag an interface, not autofix it — its fixer
+  works by pattern-replacing a `type` alias's body, which is a single text
+  expression; an interface's members are a structural list, so add the modifier
+  by hand.
+- **Wrap the type in `Readonly<...>` at the point a hook returns or accepts it**
+  — e.g. `export function useTheme(): Readonly<ThemePreference>`. Once every
+  member is already `readonly`, `Readonly<T>` is structurally redundant as far
+  as the type checker is concerned — but it documents the contract at the
+  function signature itself, visible without opening the interface, so the
+  guarantee still reads correctly even if a later edit to the interface ever
+  slipped on a member's `readonly`. Not lint-enforced: the only mechanical check
+  available is a syntactic match against the literal `Readonly<...>` text, which
+  produces false positives the moment a hook returns something that isn't a
+  named interface (a tuple, a union, an inline object literal) — worse coverage
+  than the previous bullet's real, type-checked property, for no type-safety
+  gain of its own. Apply it by hand and hold it in review instead.
+
 ## Development
 
 This is a [pnpm](https://pnpm.io) project; Node `>=22` (see `.nvmrc`).
