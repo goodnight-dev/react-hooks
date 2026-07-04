@@ -5,13 +5,13 @@ const QUERY = '(prefers-color-scheme: dark)';
 export type Theme = 'dark' | 'light';
 
 export interface ThemePreference {
-  isDarkMode: boolean;
-  isLightMode: boolean;
+  readonly isDarkMode: boolean;
+  readonly isLightMode: boolean;
   /**
    * `'dark'` or `'light'`, or `undefined` before the client has reported its
    * actual preference (always the case during SSR).
    */
-  theme: Theme | undefined;
+  readonly theme: Theme | undefined;
 }
 
 const getSnapshot = (): Theme =>
@@ -53,7 +53,7 @@ const subscribe = (onStoreChange: () => void): (() => void) => {
  * return <div data-theme={theme}>{isDarkMode ? '🌙' : '☀️'}</div>;
  * ```
  */
-export function useTheme(): ThemePreference {
+export function useTheme(): Readonly<ThemePreference> {
   const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
   // useSyncExternalStore's own snapshot (the primitive `theme` above) must be
