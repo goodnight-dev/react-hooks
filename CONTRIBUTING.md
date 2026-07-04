@@ -131,27 +131,36 @@ Run `pnpm check` before opening a pull request.
 ## Adding a hook
 
 There is no scaffold yet (see the open tasks in
-[`docs/recipes/adding-a-hook.md`](./docs/recipes/adding-a-hook.md)) — add the
-files by hand:
+[`docs/recipes/adding-a-hook.md`](./docs/recipes/adding-a-hook.md)) — branch
+first, add the files by hand, then open a PR:
 
-1. Create `src/use-<name>.ts` (kebab-case filename, camelCase export — e.g.
+1. **Branch off `main` before you change anything** —
+   `git switch -c <type>/use-<name>` (e.g. `feat/use-media-query`). `main` is
+   protected: a direct push is rejected, and every change lands through a pull
+   request (see [Branching & pull requests](#branching--pull-requests)). This is
+   step 1 because it's the one thing the rest of the checklist can't catch for
+   you — `pnpm check` passes just as happily on `main` as on a branch, so
+   nothing downstream will remind you.
+2. Create `src/use-<name>.ts` (kebab-case filename, camelCase export — e.g.
    `use-local-storage.ts` exporting `useLocalStorage`) with a thorough TSDoc
    comment (summary, `@returns`, `@example`), implemented per §1 — SSR-safe, no
    unguarded browser globals.
-2. Add `src/use-<name>.test.ts` covering the initial value, updates, and cleanup
+3. Add `src/use-<name>.test.ts` covering the initial value, updates, and cleanup
    on unmount.
-3. Re-export it from `src/index.ts`. This is the step that makes it importable
+4. Re-export it from `src/index.ts`. This is the step that makes it importable
    from the barrel, and the easiest to skip — `pnpm check` still passes without
    it.
-4. Add it to `src/index.test.ts` so a forgotten re-export fails the build
+5. Add it to `src/index.test.ts` so a forgotten re-export fails the build
    instead of shipping.
-5. Add a subpath export for it in `package.json`'s `exports` map and an entry
+6. Add a subpath export for it in `package.json`'s `exports` map and an entry
    point in `tsdown.config.ts` (§4).
-6. Add the hook to this README's API section (hand-maintained, so a new export
+7. Add the hook to this README's API section (hand-maintained, so a new export
    is invisible to consumers until you do).
-7. If the implementation has interesting alternatives, add `src/use-<name>.md`
+8. If the implementation has interesting alternatives, add `src/use-<name>.md`
    (§3).
-8. Run `pnpm check`, then add a changeset: `pnpm changeset`.
+9. Run `pnpm check`, then add a changeset: `pnpm changeset`.
+10. Push the branch and open a PR against `main` (see
+    [Branching & pull requests](#branching--pull-requests)).
 
 For the full walkthrough, see the [recipes](./docs/recipes/):
 
