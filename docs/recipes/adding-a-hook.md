@@ -8,11 +8,21 @@ Replace `useTheme` below with your hook's name.
 
 ## Checklist
 
+**Step 0, before anything below: branch off `main`.**
+`git switch -c <type>/use-<name>` (e.g. `feat/use-media-query`). `main` is
+protected — a direct push is rejected, and every change lands through a PR (see
+[CONTRIBUTING § Branching & pull requests](../../CONTRIBUTING.md#branching--pull-requests)).
+It's numbered 0 because it's the one misstep the rest of this list can't catch
+for you: `pnpm check` is exactly as green on `main` as on a branch, so nothing
+downstream will flag it.
+
 Every step matters, but step 3 is the one that bites: a hook can be written,
 tested, documented, and released while still being **unreachable** by consumers,
 because nothing fails. Treat the barrel and the entry-point test as part of
 "done," not paperwork.
 
+- [ ] 0. **Branch off `main`** — `git switch -c <type>/use-<name>` (never commit
+      to `main` directly)
 - [ ] 1. Source file with thorough TSDoc — `src/use-theme.ts`
 - [ ] 2. Tests covering the initial value, updates, and unmount cleanup —
       `src/use-theme.test.ts`
