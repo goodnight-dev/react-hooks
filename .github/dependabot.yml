@@ -17,6 +17,13 @@ updates:
     schedule:
       interval: weekly
       day: monday
+    # pnpm 11 enforces a 1-day minimumReleaseAge by default, so a version
+    # published in the day before Monday's run fails `pnpm install` in CI
+    # (ERR_PNPM_MINIMUM_RELEASE_AGE_VIOLATION). Only open a PR once a version is
+    # old enough to clear that gate. Keep default-days >= the pnpm
+    # minimumReleaseAge (1 day) plus a buffer.
+    cooldown:
+      default-days: 2
     open-pull-requests-limit: 5
     commit-message:
       prefix: chore
