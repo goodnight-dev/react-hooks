@@ -33,6 +33,14 @@ updates:
         applies-to: version-updates
         patterns: ['*']
         update-types: ['minor', 'patch']
+    # TypeScript 7 (the native rewrite) drops the `ts.Extension` enum from the
+    # JS API, which crashes @typescript-eslint/typescript-estree at load and
+    # takes ESLint down. No typescript-eslint release supports TS 7 yet (peer
+    # range caps at `typescript <6.1.0`). Skip the major until it does; minor
+    # and patch bumps still flow through npm-minor-patch above. Tracked in #16.
+    ignore:
+      - dependency-name: 'typescript'
+        update-types: ['version-update:semver-major']
 
   # ── GitHub Actions workflow pins ────────────────────────────────────────────
   - package-ecosystem: github-actions
