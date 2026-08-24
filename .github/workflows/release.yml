@@ -45,10 +45,10 @@ jobs:
       # When a changeset is present, opens/updates a "Version Packages" PR.
       # When that PR merges (no changesets left, version bumped), it publishes.
       - name: Create Version PR or publish
-        uses: changesets/action@v1
+        uses: changesets/action@v2
         with:
-          version: pnpm run version-packages
-          publish: pnpm run release
+          version-script: pnpm run version-packages
+          publish-script: pnpm run release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # No NODE_AUTH_TOKEN on purpose: setting it (real OR empty) makes npm
