@@ -1,4 +1,5 @@
 export { useLocalStorage } from './use-local-storage.js';
+export { useOnlineStatus } from './use-online-status.js';
 export type { Theme, ThemePreference } from './use-theme.js';
 export { useTheme } from './use-theme.js';
 export type { WindowSize } from './use-window-size.js';

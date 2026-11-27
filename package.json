@@ -31,6 +31,10 @@
       "types": "./dist/use-local-storage.d.mts",
       "import": "./dist/use-local-storage.mjs"
     },
+    "./useOnlineStatus": {
+      "types": "./dist/use-online-status.d.mts",
+      "import": "./dist/use-online-status.mjs"
+    },
     "./useTheme": {
       "types": "./dist/use-theme.d.mts",
       "import": "./dist/use-theme.mjs"
