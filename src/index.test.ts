@@ -10,6 +10,7 @@ describe('package entry point', () => {
   it('exports exactly the documented public surface', () => {
     expect(Object.keys(api).sort()).toStrictEqual([
       'useLocalStorage',
+      'useOnlineStatus',
       'useTheme',
       'useWindowSize',
     ]);

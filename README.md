@@ -8,8 +8,8 @@ project, packaged the right way.
 [![docs](https://img.shields.io/badge/docs-online-blue)](https://goodnight-dev.github.io/react-hooks/)
 
 > **Status:** bootstrapping — the packaging, CI, docs, and release pipeline are
-> in place; the hook surface is still one hook and growing. As much a showcase
-> of hook-packaging best practices as a hooks library.
+> in place; the hook surface is still small and growing. As much a showcase of
+> hook-packaging best practices as a hooks library.
 
 ## Install
 
@@ -39,6 +39,7 @@ Both are fully typed, ESM-only, and tree-shakable.
 | `useTheme()`                    | Reads the OS `prefers-color-scheme`, live-updating on change.                      |
 | `useLocalStorage(key, initial)` | Reads and writes a JSON-serializable value in `localStorage`, syncing across tabs. |
 | `useWindowSize()`               | Reads the viewport `width` / `height`, live-updating on resize.                    |
+| `useOnlineStatus()`             | Reads whether the browser is online (`navigator.onLine`), live-updating.           |
 
 ```tsx
 import { useLocalStorage, useTheme } from '@goodnight-dev/react-hooks';
@@ -67,9 +68,10 @@ function App() {
 ```
 
 See [`src/use-theme.md`](./src/use-theme.md),
-[`src/use-local-storage.md`](./src/use-local-storage.md), and
-[`src/use-window-size.md`](./src/use-window-size.md) for the design rationale
-behind each.
+[`src/use-local-storage.md`](./src/use-local-storage.md),
+[`src/use-window-size.md`](./src/use-window-size.md), and
+[`src/use-online-status.md`](./src/use-online-status.md) for the design
+rationale behind each.
 
 ## Project goals
 
